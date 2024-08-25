@@ -1,7 +1,6 @@
 package org.example2.testdemo.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import org.example2.testdemo.dto.UserDTO;
@@ -14,7 +13,7 @@ import java.util.List;
 
 
 @Service
-@Transactional
+
 @RequiredArgsConstructor
 public class UserServiceIMPL implements UserService {
     private static final String WEAVY_BASE_URL = "https://dc0997f95e5a434a885ae24ad75ab2f5.weavy.io";
