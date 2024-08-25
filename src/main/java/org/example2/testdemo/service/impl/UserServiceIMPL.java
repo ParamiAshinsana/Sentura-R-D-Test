@@ -13,10 +13,8 @@ import java.util.List;
 
 
 @Service
-
-@RequiredArgsConstructor
 public class UserServiceIMPL implements UserService {
-    private static final String WEAVY_BASE_URL = "https://dc0997f95e5a434a885ae24ad75ab2f5.weavy.io";
+    private static final String WEAVY_BASE_URL = "https://dc0997f95e5a434a885ae24ad75ab2f5.weavy.io/api/users";
     private static final String API_KEY = "wys_PRXM813kZwCMujWqC2BEDw5Ioh9CKf1MdLXg";
 
     private final OkHttpClient client = new OkHttpClient();

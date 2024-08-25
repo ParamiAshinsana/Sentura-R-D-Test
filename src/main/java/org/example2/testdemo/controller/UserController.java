@@ -1,6 +1,5 @@
 package org.example2.testdemo.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.example2.testdemo.dto.UserDTO;
 import org.example2.testdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable("id") String id) throws IOException {
+        System.out.println(id);
         String response = userService.getUserById(id);
         return ResponseEntity.ok(response);
     }
