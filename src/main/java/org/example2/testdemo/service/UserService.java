@@ -10,4 +10,6 @@ public interface UserService {
     List<UserDTO> getAllUser();
     void deleteUser(String id);
     void updateUser(String id, UserDTO userDTO);
+
+    String getUserById(String id) throws IOException;
 }

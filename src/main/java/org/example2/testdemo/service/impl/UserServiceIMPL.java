@@ -56,4 +56,17 @@ public class UserServiceIMPL implements UserService {
     public void updateUser(String id, UserDTO userDTO) {
 
     }
+
+    @Override
+    public String getUserById(String id) throws IOException {
+        Request request = new Request.Builder()
+                .url(WEAVY_BASE_URL + "/" + id)
+                .get()
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
+        }
 }

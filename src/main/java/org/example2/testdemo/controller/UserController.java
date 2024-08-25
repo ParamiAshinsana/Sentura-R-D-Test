@@ -21,4 +21,10 @@ public class UserController {
         String response = userService.createUser(userDTO);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> getUserById(@PathVariable("id") String id) throws IOException {
+        String response = userService.getUserById(id);
+        return ResponseEntity.ok(response);
+    }
 }
