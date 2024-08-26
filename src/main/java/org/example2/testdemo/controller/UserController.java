@@ -21,10 +21,30 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<String> getUserById(@PathVariable("id") String id) throws IOException {
         System.out.println(id);
         String response = userService.getUserById(id);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<String> getAllUsers() throws IOException {
+        String response = userService.getAllUsers();
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<String> updateUsers(@RequestBody UserDTO userDTO, @PathVariable ("id") String id) throws IOException {
+        System.out.println(id);
+        String response = userService.updateUser(id, userDTO);
+        return ResponseEntity.ok(response);
+    }
+    @DeleteMapping("/{id}/trash")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") String id) throws IOException {
+        System.out.println(id);
+        String response = userService.deleteUser(id);
+        return ResponseEntity.ok(response);
+    }
+
 }

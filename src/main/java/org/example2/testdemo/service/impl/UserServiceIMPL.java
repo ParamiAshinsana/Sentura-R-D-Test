@@ -1,15 +1,12 @@
 package org.example2.testdemo.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import okhttp3.*;
 import org.example2.testdemo.dto.UserDTO;
 import org.example2.testdemo.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
-
 
 
 @Service
@@ -40,19 +37,49 @@ public class UserServiceIMPL implements UserService {
         }
     }
 
-    @Override
-    public List<UserDTO> getAllUser() {
-        return null;
+    public String getAllUsers() throws IOException {
+        Request request = new Request.Builder()
+                .url(WEAVY_BASE_URL)
+                .get()
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     @Override
-    public void deleteUser(String id) {
+    public String deleteUser(String id) throws IOException {
+        Request request = new Request.Builder()
+                .url(WEAVY_BASE_URL+ "/" + id+ "/trash")
+                .post(RequestBody.create("", null))
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .build();
 
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     @Override
-    public void updateUser(String id, UserDTO userDTO) {
+    public String updateUser(String id, UserDTO userDTO) throws IOException{
+        System.out.println(userDTO.getEmail());
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
+        okhttp3.RequestBody body = RequestBody.create(
+                new ObjectMapper().writeValueAsString(userDTO), JSON
+        );
+
+        Request request = new Request.Builder()
+                .url(WEAVY_BASE_URL+ "/" + id)
+                .put(body)
+                .addHeader("Authorization", "Bearer " + API_KEY)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            return response.body().string();
+        }
     }
 
     @Override
